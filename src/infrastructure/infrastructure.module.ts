@@ -1,9 +1,10 @@
 import { Module } from "@nestjs/common";
 import { ApiConfigModule } from "./services/config/config.module";
+import { LoggerModule } from "./services/logger/logger.module";
 
 @Module({
-  imports: [ApiConfigModule],
+  imports: [ApiConfigModule, LoggerModule],
   providers: [],
-  exports: [ApiConfigModule],
+  exports: [ApiConfigModule, LoggerModule],
 })
 export class InfrastructureModule {}

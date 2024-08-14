@@ -1,13 +1,15 @@
 import { NestFactory } from "@nestjs/core";
 import { AppModule } from "./app.module";
 import { SwaggerModule, DocumentBuilder, SwaggerDocumentOptions } from "@nestjs/swagger";
-import { INestApplication } from "@nestjs/common";
-import { IConfigService, IConfigServiceToken } from "@core/interfaces";
+import { INestApplication, LoggerService } from "@nestjs/common";
+import { IConfigService, IConfigServiceToken, ILoggerService, ILoggerServiceToken } from "@core/interfaces";
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
-    // bufferLogs: true,
+    bufferLogs: true,
   });
+
+  app.useLogger(app.get<ILoggerService>(ILoggerServiceToken));
 
   const configService = app.get<IConfigService>(IConfigServiceToken);
   const port = configService.getPort();
