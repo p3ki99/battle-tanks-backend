@@ -1,7 +1,7 @@
 import { NestFactory } from "@nestjs/core";
 import { AppModule } from "./app.module";
 import { SwaggerModule, DocumentBuilder, SwaggerDocumentOptions } from "@nestjs/swagger";
-import { INestApplication } from "@nestjs/common";
+import { INestApplication, ValidationPipe } from "@nestjs/common";
 import {
   IConfigService,
   IConfigServiceToken,
@@ -20,6 +20,7 @@ async function bootstrap() {
   const port = configService.getPort();
 
   configureSwagger(app);
+  configureValidation(app);
 
   await app.listen(port);
 }
@@ -39,4 +40,13 @@ function configureSwagger(app: INestApplication) {
 
   const document = SwaggerModule.createDocument(app, config, options);
   SwaggerModule.setup("api", app, document);
+}
+
+function configureValidation(app: INestApplication) {
+  app.useGlobalPipes(
+    new ValidationPipe({
+      transform: true,
+      forbidNonWhitelisted: true,
+    }),
+  );
 }
