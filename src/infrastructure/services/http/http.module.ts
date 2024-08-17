@@ -1,5 +1,5 @@
 import { Module } from "@nestjs/common";
-import { IHttpServiceToken } from "@core/interfaces/http.service";
+import { IHttpServiceToken } from "@core/application/interfaces/infra-services/http-service.interface";
 import { HttpModule as NestHttpModule } from "@nestjs/axios";
 import { NestHttpService } from "./nest-http.service";
 

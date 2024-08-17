@@ -1,5 +1,5 @@
 import { Module } from "@nestjs/common";
-import { ILoggerServiceToken } from "@core/interfaces";
+import { ILoggerServiceToken } from "@core/application/interfaces/infra-services";
 import { BTConsoleLogger } from "./bt-console-logger.service";
 
 @Module({

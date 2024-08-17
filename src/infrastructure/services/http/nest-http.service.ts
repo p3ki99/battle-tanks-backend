@@ -1,7 +1,7 @@
 import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { HttpService } from "@nestjs/axios";
 import { AxiosError, AxiosResponse } from "axios";
-import { IHttpService } from "@core/interfaces/http.service";
+import { IHttpService } from "@core/application/interfaces/infra-services/http-service.interface";
 import { catchError, firstValueFrom } from "rxjs";
 
 @Injectable()
