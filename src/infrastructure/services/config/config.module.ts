@@ -1,14 +1,14 @@
 import { Module } from "@nestjs/common";
-import { ApiConfigService } from "./api-config.service";
+import { AppConfigService } from "./app-config.service";
 import { IConfigServiceToken } from "@core/application/interfaces";
 
 @Module({
   providers: [
     {
       provide: IConfigServiceToken,
-      useClass: ApiConfigService,
+      useClass: AppConfigService,
     },
   ],
   exports: [IConfigServiceToken],
 })
-export class ApiConfigModule {}
+export class AppConfigModule {}

@@ -12,6 +12,7 @@ function getEnv(): IEnvironment {
     case "dev":
       return devEnv;
     default:
+      console.warn("using local env");
       return localEnv;
   }
 }

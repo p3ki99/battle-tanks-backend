@@ -2,13 +2,13 @@
 import { Module } from "@nestjs/common";
 import { TypeOrmModule, TypeOrmModuleOptions } from "@nestjs/typeorm";
 import { IConfigService, IConfigServiceToken } from "@core/application/interfaces";
-import { ApiConfigModule } from "@infrastructure/services/config/config.module";
+import { AppConfigModule } from "@infrastructure/services/config/config.module";
 import { DatabaseType, DataSource } from "typeorm";
 
 @Module({
   imports: [
     TypeOrmModule.forRootAsync({
-      imports: [ApiConfigModule],
+      imports: [AppConfigModule],
       inject: [IConfigServiceToken],
       useFactory: (configService: IConfigService): TypeOrmModuleOptions => {
         const dbConfig = configService.getDatabaseConfiguration("default")!;

@@ -4,7 +4,7 @@ import { IConfigService } from "@core/application/interfaces/infra-services";
 import { IDatabasesConfigurations, IDBConfiguration } from "env/env";
 
 @Injectable()
-export class ApiConfigService implements IConfigService {
+export class AppConfigService implements IConfigService {
   constructor(private configService: ConfigService) {}
 
   getEnv(): string {
