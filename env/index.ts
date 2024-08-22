@@ -5,6 +5,7 @@ import devEnv from "./dev";
 function getEnv(): IEnvironment {
   const env = process.env.APP_ENV as APP_ENV_TYPES | undefined;
   console.log("Env ->", env);
+
   switch (env) {
     case "local":
       return localEnv;

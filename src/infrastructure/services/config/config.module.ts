@@ -1,6 +1,6 @@
 import { Module } from "@nestjs/common";
-import { IConfigServiceToken } from "@core/application/interfaces/infra-services";
 import { ApiConfigService } from "./api-config.service";
+import { IConfigServiceToken } from "@core/application/interfaces";
 
 @Module({
   providers: [
