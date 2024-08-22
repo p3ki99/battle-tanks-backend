@@ -1,0 +1,37 @@
+version: "3.8"
+
+services:
+  bt-database:
+    container_name: bt.Postgres
+    restart: on-failure:5
+    image: postgres:16
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=battle-tanks
+    deploy:
+      resources:
+        limits:
+          cpus: "2.0"
+          memory: 1024M
+        reservations:
+          cpus: "0.25"
+          memory: 128M
+    networks:
+      - "bt-default"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready", "-d", "db_prod"]
+      interval: "10s"
+      timeout: "30s"
+      retries: 5
+      start_period: "20s"
+    volumes:
+      - "bt-database:/var/lib/postgresql/data"
+    ports:
+      - "5432:5432"
+
+networks:
+  bt-default:
+
+volumes:
+  bt-database:
