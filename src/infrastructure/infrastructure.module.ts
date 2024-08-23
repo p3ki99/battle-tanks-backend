@@ -1,12 +1,10 @@
 import { Module } from "@nestjs/common";
-import { AppConfigModule } from "./services/config/config.module";
-import { LoggerModule } from "./services/logger/logger.module";
-import { HttpModule } from "./services/http/http.module";
+import { AppConfigModule, LoggerModule, HttpModule, ExceptionModule } from "./services";
 import { DatabaseModule } from "./databases/database.module";
 
 @Module({
-  imports: [DatabaseModule, AppConfigModule, LoggerModule, HttpModule],
+  imports: [DatabaseModule, AppConfigModule, LoggerModule, HttpModule, ExceptionModule],
   providers: [],
-  exports: [AppConfigModule, LoggerModule, HttpModule],
+  exports: [AppConfigModule, LoggerModule, HttpModule, ExceptionModule],
 })
 export class InfrastructureModule {}
