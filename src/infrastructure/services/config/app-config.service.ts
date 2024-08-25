@@ -15,6 +15,10 @@ export class AppConfigService implements IConfigService {
     return this.configService.get<number>("port", 3000);
   }
 
+  getSaltSizeInBytes(): number {
+    return this.configService.get<number>("saltSizeInBytes", 16);
+  }
+
   getDatabasesConfiguration(): IDatabasesConfigurations {
     return this.configService.get<IDatabasesConfigurations>("databases", []);
   }
