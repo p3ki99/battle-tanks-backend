@@ -4,9 +4,11 @@ import { TypeOrmModule, TypeOrmModuleOptions } from "@nestjs/typeorm";
 import { IConfigService, IConfigServiceToken } from "@core/application/interfaces";
 import { AppConfigModule } from "@infrastructure/services/config/config.module";
 import { DatabaseType, DataSource } from "typeorm";
+import { RepositoryModule } from "./typeorm/repositories/repository.module";
 
 @Module({
   imports: [
+    RepositoryModule,
     TypeOrmModule.forRootAsync({
       imports: [AppConfigModule],
       inject: [IConfigServiceToken],
@@ -30,6 +32,6 @@ import { DatabaseType, DataSource } from "typeorm";
       },
     }),
   ],
-  exports: [],
+  exports: [RepositoryModule],
 })
 export class DatabaseModule {}

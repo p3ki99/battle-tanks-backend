@@ -1,27 +1,35 @@
 // infrastructure/repositories/user.repository.ts
-import { Injectable } from "@nestjs/common";
+import { Inject, Injectable } from "@nestjs/common";
 import { Repository } from "typeorm";
 import { InjectRepository } from "@nestjs/typeorm";
 import { UserModel } from "../models/user.model";
 import { User } from "@core/domain/entities";
 import { IUserRepository } from "@core/domain/repositories/user-repository.interface";
+import { IInfraMapper, IInfraMapperToken } from "@core/application/interfaces/infra-services/infra-mapper.interface";
 
 @Injectable()
 export class UserRepository implements IUserRepository {
   constructor(
-    @InjectRepository(User)
+    @InjectRepository(UserModel)
     private userRepository: Repository<UserModel>,
+    @Inject(IInfraMapperToken)
+    private mapper: IInfraMapper,
   ) {}
 
   async findAll(): Promise<User[]> {
-    return await this.userRepository.find();
+    const users = await this.userRepository.find();
+    return this.mapper.mapArray(users, UserModel, User);
   }
 
   async findById(id: number): Promise<User | null> {
-    return await this.userRepository.findOne({ where: { id: id } });
+    const user = await this.userRepository.findOne({ where: { id: id } });
+    return this.mapper.map(user, UserModel, User);
   }
 
   async create(user: User): Promise<User> {
-    return await this.userRepository.save(user);
+    const userModel = this.mapper.map(user, User, UserModel);
+    const created = await this.userRepository.save(userModel);
+
+    return this.mapper.map(created, UserModel, User);
   }
 }
