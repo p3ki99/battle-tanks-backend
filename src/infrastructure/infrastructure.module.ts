@@ -1,10 +1,11 @@
-import { Module } from "@nestjs/common";
-import { AppConfigModule, LoggerModule, HttpModule, ExceptionModule, CryptographyModule } from "./services";
+import { Global, Module } from "@nestjs/common";
 import { DatabaseModule } from "./databases/database.module";
+import { InfraServiceModule } from "./services/infra-service.module";
 
+@Global()
 @Module({
-  imports: [DatabaseModule, AppConfigModule, LoggerModule, HttpModule, ExceptionModule, CryptographyModule],
+  imports: [DatabaseModule, InfraServiceModule],
   providers: [],
-  exports: [AppConfigModule, LoggerModule, HttpModule, ExceptionModule, CryptographyModule],
+  exports: [DatabaseModule, InfraServiceModule],
 })
 export class InfrastructureModule {}
