@@ -8,6 +8,7 @@ import {
   ILoggerService,
   ILoggerServiceToken,
 } from "@core/application/interfaces/infra-services";
+import { CustomValidationPipe } from "./web/pipes/custom-validation.pipe";
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
@@ -44,9 +45,11 @@ function configureSwagger(app: INestApplication) {
 
 function configureValidation(app: INestApplication) {
   app.useGlobalPipes(
-    new ValidationPipe({
+    new CustomValidationPipe({
       transform: true,
       forbidNonWhitelisted: true,
+      whitelist: true,
+      enableDebugMessages: true,
     }),
   );
 }

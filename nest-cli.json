@@ -3,6 +3,14 @@
   "collection": "@nestjs/schematics",
   "sourceRoot": "src",
   "compilerOptions": {
-    "deleteOutDir": true
+    "deleteOutDir": true,
+    "plugins": [
+      {
+        "name": "@automapper/classes/transformer-plugin",
+        "options": {
+          "modelFileNameSuffix": [".entity.ts", ".model.ts", ".vm.ts", ".dto.ts"]
+        }
+      }
+    ]
   }
 }
