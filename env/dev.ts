@@ -5,6 +5,10 @@ const devEnv: IEnvironment = {
   port: 3000,
   saltSizeInBytes: 16,
   databases: [],
+  jwt: {
+    secret: "secret123",
+    expiresIn: "1d",
+  },
 };
 
 export default devEnv;

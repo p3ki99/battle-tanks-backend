@@ -5,6 +5,7 @@ export interface IEnvironment {
   port: number;
   saltSizeInBytes: number;
   databases: IDatabasesConfigurations;
+  jwt: IJwtConfiguration;
 }
 
 export interface IDBConfiguration {
@@ -19,3 +20,8 @@ export interface IDBConfiguration {
 }
 
 export interface IDatabasesConfigurations extends Array<IDBConfiguration> {}
+
+export interface IJwtConfiguration {
+  secret: string;
+  expiresIn: string | number;
+}

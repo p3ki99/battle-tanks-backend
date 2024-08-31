@@ -15,6 +15,10 @@ const localEnv: IEnvironment = {
       database: "battle-tanks",
     },
   ],
+  jwt: {
+    secret: "secret123",
+    expiresIn: "1d",
+  },
 };
 
 export default localEnv;

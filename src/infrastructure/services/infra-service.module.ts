@@ -4,11 +4,11 @@ import { LoggerModule } from "./logger/logger.module";
 import { HttpModule } from "./http/http.module";
 import { ExceptionModule } from "./exception/exception.module";
 import { CryptographyModule } from "./cryptography/cryptography.module";
-import { InfraMapperModule } from "./mapper/infra-mapper.module";
+import { JwtModule } from "./jwt/jwt.module";
 
 @Module({
-  imports: [AppConfigModule, LoggerModule, HttpModule, ExceptionModule, CryptographyModule],
+  imports: [AppConfigModule, LoggerModule, HttpModule, ExceptionModule, CryptographyModule, JwtModule],
   providers: [],
-  exports: [AppConfigModule, LoggerModule, HttpModule, ExceptionModule, CryptographyModule],
+  exports: [AppConfigModule, LoggerModule, HttpModule, ExceptionModule, CryptographyModule, JwtModule],
 })
 export class InfraServiceModule {}

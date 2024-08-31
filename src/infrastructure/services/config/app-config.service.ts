@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { IConfigService } from "@core/application/interfaces/infra-services";
-import { IDatabasesConfigurations, IDBConfiguration } from "env/env";
+import { IDatabasesConfigurations, IDBConfiguration, IJwtConfiguration } from "env/env";
 
 @Injectable()
 export class AppConfigService implements IConfigService {
@@ -25,5 +25,9 @@ export class AppConfigService implements IConfigService {
 
   getDatabaseConfiguration(name: string): IDBConfiguration | undefined {
     return this.configService.get<IDatabasesConfigurations>("databases", []).find((dbConfig) => dbConfig.name === name);
+  }
+
+  getJwtConfiguration(): IJwtConfiguration {
+    return this.configService.get<IJwtConfiguration>("jwt", { secret: "secret123", expiresIn: "1d" });
   }
 }

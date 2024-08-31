@@ -1,4 +1,4 @@
-import { IDatabasesConfigurations, IDBConfiguration } from "env/env";
+import { IDatabasesConfigurations, IDBConfiguration, IJwtConfiguration } from "env/env";
 
 export interface IConfigService {
   getEnv(): string;
@@ -6,6 +6,7 @@ export interface IConfigService {
   getSaltSizeInBytes(): number;
   getDatabasesConfiguration(): IDatabasesConfigurations;
   getDatabaseConfiguration(name: string): IDBConfiguration | undefined;
+  getJwtConfiguration(): IJwtConfiguration;
 }
 
 export const IConfigServiceToken = "IConfigService";
