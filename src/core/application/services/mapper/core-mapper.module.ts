@@ -1,6 +1,7 @@
 import { ICoreMapperToken } from "@core/application/interfaces";
 import { Module } from "@nestjs/common";
 import { CoreAutoMapperService } from "./core-auto-mapper.service";
+import { UserProfile } from "./user.profile";
 
 @Module({
   providers: [
@@ -8,6 +9,7 @@ import { CoreAutoMapperService } from "./core-auto-mapper.service";
       provide: ICoreMapperToken,
       useClass: CoreAutoMapperService,
     },
+    UserProfile,
   ],
   exports: [ICoreMapperToken],
 })

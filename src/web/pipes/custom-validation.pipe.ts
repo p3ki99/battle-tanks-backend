@@ -1,4 +1,4 @@
-import { ValidationPipe, BadRequestException, ValidationError, ValidationPipeOptions } from "@nestjs/common";
+import { ValidationPipe, ValidationPipeOptions } from "@nestjs/common";
 
 export class CustomValidationPipe extends ValidationPipe {
   constructor(options: ValidationPipeOptions) {

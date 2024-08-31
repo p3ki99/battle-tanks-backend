@@ -1,7 +1,7 @@
 import { Inject, Injectable } from "@nestjs/common";
 import { BaseAction } from "../base-action.action";
 import { IUserRepository, IUserRepositoryToken } from "@core/domain/repositories/user-repository.interface";
-import { RegisterUserDto } from "@core/application/dtos";
+import { RegisterUserDto, UserDto } from "@core/application/dtos";
 import { User } from "@core/domain/entities";
 import {
   IConfigService,
@@ -11,7 +11,7 @@ import {
 } from "@core/application/interfaces";
 
 @Injectable()
-export class RegisterUser extends BaseAction<RegisterUserDto, User> {
+export class RegisterUser extends BaseAction<RegisterUserDto, UserDto> {
   constructor(
     @Inject(IHashingServiceToken) private hashingService: IHashingService,
     @Inject(IConfigServiceToken) private configService: IConfigService,
@@ -20,26 +20,23 @@ export class RegisterUser extends BaseAction<RegisterUserDto, User> {
     super();
   }
 
-  protected override async handle(registerUserDto: RegisterUserDto): Promise<User> {
+  protected override async handle(registerUserDto: RegisterUserDto): Promise<UserDto> {
     const { email, username, password } = registerUserDto;
 
-    const userExists = await this.userRepository.findById(1);
+    const userExists = await this.userRepository.findByEmailOrUsername(email, username);
 
-    if (userExists) this.exceptionService.conflict("User already exists", RegisterUser.name);
+    if (userExists)
+      userExists.email == email
+        ? this.exceptionService.conflict("user with this email already exists", RegisterUser.name)
+        : this.exceptionService.conflict("user with this username already exists");
 
     const { hashedPassword, salt } = await this.hashingService.hashPassword(
       password,
       this.configService.getSaltSizeInBytes(),
     );
 
-    this.loggerService.debug!(hashedPassword, salt);
+    const user = await this.userRepository.create(User.create(username, email, hashedPassword, salt));
 
-    const user = User.create(username, email, hashedPassword, salt);
-    this.loggerService.debug!(user);
-    const res = await this.userRepository.create(user);
-
-    console.log(res); // modelUser or entityUser
-
-    return res;
+    return this.mapperService.map(user, User, UserDto);
   }
 }

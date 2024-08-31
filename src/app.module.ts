@@ -1,5 +1,5 @@
 import { MiddlewareConsumer, Module, NestModule, RequestMethod } from "@nestjs/common";
-import { APP_FILTER, APP_PIPE } from "@nestjs/core";
+import { APP_FILTER } from "@nestjs/core";
 import { ConfigModule } from "@nestjs/config";
 import env from "env";
 import { PingController } from "./web/controllers/ping.controller";
@@ -10,7 +10,6 @@ import { AutomapperModule } from "@automapper/nestjs";
 import { classes } from "@automapper/classes";
 import { UserController } from "./web/controllers/user.controller";
 import { CoreModule } from "@core/application/core.module";
-import { CustomValidationPipe } from "./web/pipes/custom-validation.pipe";
 
 @Module({
   imports: [

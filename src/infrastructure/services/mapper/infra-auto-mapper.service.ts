@@ -8,7 +8,6 @@ export class InfraAutoMapperService implements IInfraMapper {
   constructor(@InjectMapper() private readonly mapper: Mapper) {}
 
   map<SRC, DST>(src: SRC, srcClass: new () => SRC, dstClass: new () => DST): DST {
-    console.log("mapping");
     return this.mapper.map(src, srcClass, dstClass);
   }
 

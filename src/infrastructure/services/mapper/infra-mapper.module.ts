@@ -5,11 +5,11 @@ import { UserModelProfile } from "./user-model.profile";
 
 @Module({
   providers: [
-    UserModelProfile,
     {
       provide: IInfraMapperToken,
       useClass: InfraAutoMapperService,
     },
+    UserModelProfile,
   ],
   exports: [IInfraMapperToken],
 })
