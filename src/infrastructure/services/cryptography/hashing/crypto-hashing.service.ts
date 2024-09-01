@@ -17,4 +17,13 @@ export class CryptoHashingService implements IHashingService {
       });
     });
   }
+
+  validatePassword(plainPassword: string, hashedPassword: string, salt: string): Promise<boolean> {
+    return new Promise((resolve, reject) => {
+      crypto.scrypt(plainPassword, salt, 64, (err, derivedKey) => {
+        if (err) reject(err);
+        resolve(derivedKey.toString("hex") === hashedPassword);
+      });
+    });
+  }
 }
