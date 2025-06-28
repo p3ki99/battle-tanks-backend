@@ -1,5 +1,5 @@
-import { IConfigService, IConfigServiceToken } from "@core/interfaces";
-import { Controller, Get, Inject, Logger } from "@nestjs/common";
+import { IConfigService, IConfigServiceToken } from "@core/application/interfaces/infra-services";
+import { Controller, Get, HttpException, HttpStatus, Inject, Logger } from "@nestjs/common";
 
 @Controller("ping")
 export class PingController {
@@ -9,6 +9,9 @@ export class PingController {
 
   @Get()
   ping(): string {
+    // const abc = {} as any;
+    // return abc.a.b;
+    // throw new HttpException("Error occured", HttpStatus.CONFLICT, { cause: PingController.name });
     return `pong - ${this.configService.getEnv()}`;
   }
 }

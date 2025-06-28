@@ -36,6 +36,7 @@ $ pnpm install
 
 ```bash
 # development
+$ pnpm start
 $ pnpm run start
 
 # watch mode
@@ -56,6 +57,32 @@ $ pnpm run test:e2e
 
 # test coverage
 $ pnpm run test:cov
+```
+
+## Docker
+
+```bash
+# start local setup
+$ docker compose -f docker-compose.local.yml up
+
+# remove local setup
+$ docker compose -f docker-compose.local.yml down -v
+
+
+```
+
+## Migrations
+
+```bash
+
+# create empty migration
+npx typeorm migration:create ./path-to-migration-dir/migration-name
+npx typeorm migration:create ./src/infrastructure/databases/typeorm/migrations/InitialMigration
+
+# automatically generate migration
+npx typeorm migration:generate -n ./path-to-migration-dir/migration-name
+npx typeorm migration:generate -- -d ./src/infrastructure/databases/database.module.ts ./src/infrastructure/databases/typeorm/migrations/InitialMigration
+
 ```
 
 ## Support
